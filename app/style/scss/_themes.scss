@@ -1,0 +1,66 @@
+@use 'variables' as *;
+
+body.dark-theme {
+  --bg: var(--dark-bg);
+  --text: var(--dark-text);
+  --card-bg: var(--dark-card-bg);
+  --card-text: var(--dark-card-text);
+
+  background-color: var(--bg);
+  color: var(--text);
+
+  .country-card {
+    background-color: var(--card-bg);
+
+    p {
+      color: var(--card-text);
+    }
+  }
+}
+
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--checkbox-bg-color);
+    transition: 0.3s;
+    border-radius: 34px;
+
+    &:before {
+      position: absolute;
+      content: '';
+      height: 24px;
+      width: 24px;
+      left: 3px;
+      bottom: 3px;
+      background-color: var(--checked-color);
+      background-image: url(../../img/moon.png);
+      background-repeat: no-repeat;
+      background-position: center;
+      transition: 0.3s;
+      border-radius: 50%;
+      padding: 2px;
+    }
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(26px);
+    background-color: var(--unchecked-color);
+    background-image: url(../../img/sun.png);
+  }
+}

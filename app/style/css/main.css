@@ -1,0 +1,221 @@
+:root {
+  --light-bg: #f5f5f5;
+  --light-text: #333;
+  --light-card-bg: #fff;
+  --light-card-text: #666;
+  --dark-bg: #222;
+  --dark-text: #fff;
+  --dark-card-bg: #333;
+  --dark-card-text: #ccc;
+  --border-color: #ccc;
+  --checkbox-bg-color: #474747;
+  --checked-color: #1b3bca;
+  --unchecked-color: #bb1a1a;
+  --container-width: 1200px;
+  --card-width: 250px;
+  --spacing: 20px;
+  --border-radius: 5px;
+  --shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: var(--light-bg);
+  color: var(--light-text);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: var(--spacing);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing);
+}
+header h1 {
+  font-size: 24px;
+}
+
+.filters {
+  display: flex;
+  gap: 15px;
+  margin-bottom: var(--spacing);
+}
+.filters #search,
+.filters #region-filter {
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 16px;
+}
+.filters #search {
+  flex: 1;
+}
+@media screen and (max-width: 840px) {
+  .filters {
+    flex-direction: column;
+  }
+}
+
+.countries {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-width), 1fr));
+  gap: var(--spacing);
+}
+
+.country-card {
+  background-color: var(--light-card-bg);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  padding: 15px;
+}
+.country-card img {
+  width: 100%;
+  height: 150px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.country-card h2 {
+  font-size: 18px;
+  margin: 10px 0;
+}
+.country-card p {
+  font-size: 14px;
+  color: var(--light-card-text);
+}
+
+body.dark-theme {
+  --bg: var(--dark-bg);
+  --text: var(--dark-text);
+  --card-bg: var(--dark-card-bg);
+  --card-text: var(--dark-card-text);
+  background-color: var(--bg);
+  color: var(--text);
+}
+body.dark-theme .country-card {
+  background-color: var(--card-bg);
+}
+body.dark-theme .country-card p {
+  color: var(--card-text);
+}
+
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.theme-switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--checkbox-bg-color);
+  transition: 0.3s;
+  border-radius: 34px;
+}
+.theme-switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 24px;
+  width: 24px;
+  left: 3px;
+  bottom: 3px;
+  background-color: var(--checked-color);
+  background-image: url(../../img/moon.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: 0.3s;
+  border-radius: 50%;
+  padding: 2px;
+}
+.theme-switch input:checked + .slider:before {
+  transform: translateX(26px);
+  background-color: var(--unchecked-color);
+  background-image: url(../../img/sun.png);
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 15px;
+  margin: 20px auto;
+  max-width: 600px;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+.error-message p {
+  margin: 0;
+  flex: 1;
+  font-weight: 500;
+}
+.error-message[data-type=not-found] {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+}
+.error-message[data-type=loading-error] {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.error-message--hidden {
+  display: none;
+  opacity: 0;
+}
+
+.error-message--visible {
+  display: flex;
+  opacity: 1;
+}
+
+.error-buttons {
+  display: flex;
+  gap: 10px;
+}
+.error-buttons button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  color: white;
+}
+.error-buttons #retry {
+  background-color: #007bff;
+}
+.error-buttons #retry:hover {
+  background-color: #0056b3;
+}
+.error-buttons #close-error {
+  background-color: #dc3545;
+}
+.error-buttons #close-error:hover {
+  background-color: #c82333;
+}
+.error-buttons[data-type=not-found] #retry {
+  display: none;
+}
