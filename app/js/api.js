@@ -4,7 +4,7 @@ export async function fetchCountries() {
   try {
     const response = await fetch(API_URL);
     if (!response.ok) {
-      throw new Error('Не вдалося завантажити дані');
+      throw new Error('Failed to load data');
     }
     const data = await response.json();
 
@@ -18,7 +18,7 @@ export async function fetchCountries() {
 
     return { success: true, data: countries };
   } catch (error) {
-    console.error('Помилка завантаження даних:', error);
+    console.error('Data loading error', error);
     return { success: false, error: error.message };
   }
 }
